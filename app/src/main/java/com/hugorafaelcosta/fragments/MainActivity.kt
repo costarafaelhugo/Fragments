@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         homeFragment = HomeFragment()
         consoleFragment = ConsoleFragment()
         gamesFragment = GamesFragment()
+
+        setFragment(homeFragment)
     }
 
     private fun setFragment(fragment: Fragment) {
