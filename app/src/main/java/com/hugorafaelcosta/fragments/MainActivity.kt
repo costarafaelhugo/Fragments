@@ -1,12 +1,15 @@
 package com.hugorafaelcosta.fragments
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener,
+    BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var buttonHome: Button
     private lateinit var buttonConsoles: Button
@@ -15,6 +18,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var homeFragment: HomeFragment
     private lateinit var gamesFragment: GamesFragment
     private lateinit var consoleFragment: ConsoleFragment
+
+    private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,6 +36,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         homeFragment = HomeFragment()
         consoleFragment = ConsoleFragment()
         gamesFragment = GamesFragment()
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         setFragment(homeFragment)
     }
@@ -53,5 +61,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 setFragment(consoleFragment)
             }
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_home -> {
+                setFragment(homeFragment)
+            }
+            R.id.menu_games -> {
+                setFragment(gamesFragment)
+            }
+            R.id.consoles -> {
+                setFragment(consoleFragment)
+            }
+        }
+
+        return true
     }
 }
